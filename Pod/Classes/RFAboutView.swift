@@ -324,7 +324,7 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
         tableHeaderLabel.textColor = self.acknowledgementsHeaderColor
         tableHeaderLabel.backgroundColor = .clearColor()
         tableHeaderLabel.textAlignment = .Left
-        tableHeaderLabel.text = NSLocalizedString(String(format: "%@ makes use of the following third party libraries. Many thanks to the developers making them available!",self.appName!) as String, comment: "Acknowlegdments header title")
+        tableHeaderLabel.text = NSBundle.mainBundle().localizedStringForKey("%@ makes use of the following third party libraries. Many thanks to the developers making them available!", value: String(format: "%@ makes use of the following third party libraries. Many thanks to the developers making them available!",self.appName!) as String, table: "RFAboutView") //Acknowlegdments header title
         headerView.addSubview(tableHeaderLabel)
         tableHeaderLabel.sizeToFit()
         tableHeaderLabel.layoutIfNeeded()
@@ -429,7 +429,7 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
         
         let leftItem = UIBarButtonItem(image:self.closeButtonImage, style: .Plain, target: self, action: Selector("close"))
         self.navigationItem.leftBarButtonItem = leftItem
-        self.navigationItem.title = NSLocalizedString("About", comment:"UINavigationBar Title")
+        self.navigationItem.title = NSBundle.mainBundle().localizedStringForKey("About", value: "About", table: "RFAboutView") //UINavigationBar Title
     }
     
     //MARK:- UITableView Delegate & Data Source
@@ -516,7 +516,7 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
         var messageString = ""
         
         if self.includeDiagnosticInformationInEmail {
-            messageString = String(format: NSLocalizedString("<p>[Please insert your message here]</p><p><em>For support inquiries, please include the following information. These make it easier for me to help you. Thank you!</em><p><hr><p><strong>Support Information</strong></p></p>%@ Version %@ (%@)<br>%@ (%@)<br>iOS %@ (%@)</p><hr>", comment: "Prefilled Email message text"),self.appName!, self.appVersion!, self.appBuild!, device, deviceString!, iOSVersion, lang)
+            messageString = String(format: NSBundle.mainBundle().localizedStringForKey("<p>[Please insert your message here]</p><p><em>For support inquiries, please include the following information. These make it easier for me to help you. Thank you!</em><p><hr><p><strong>Support Information</strong></p></p>%@ Version %@ (%@)<br>%@ (%@)<br>iOS %@ (%@)</p><hr>", value: NSLocalizedString("<p>[Please insert your message here]</p><p><em>For support inquiries, please include the following information. These make it easier for me to help you. Thank you!</em><p><hr><p><strong>Support Information</strong></p></p>%@ Version %@ (%@)<br>%@ (%@)<br>iOS %@ (%@)</p><hr>", comment: "Prefilled Email message text"), table: "RFAboutView"),self.appName!, self.appVersion!, self.appBuild!, device, deviceString!, iOSVersion, lang)
         }
         
         let subject = String(format: "%@ %@", self.appName!, self.appVersion!)
@@ -531,7 +531,7 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
         } else {
             let supportText = String(format: "\"%@ Version %@ (%@), %@ (%@), iOS %@ (%@)\"",self.appName!, self.appVersion!, self.appBuild!, device, deviceString!, iOSVersion, lang)
             
-            let alert = UIAlertController(title: NSLocalizedString("Cannot send Email", comment: "Cannot send Email"), message: String(format:NSLocalizedString("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", comment: "Error message: no email accounts available"),self.contactEmail!, supportText, lang), preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: NSBundle.mainBundle().localizedStringForKey("Cannot send Email", value: NSLocalizedString("Cannot send Email", comment: "Cannot send Email"), table: "RFAboutView"), message: String(format:NSBundle.mainBundle().localizedStringForKey("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", value: NSLocalizedString("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", comment: "Error message: no email accounts available"), table: "RFAboutView"),self.contactEmail!, supportText, lang), preferredStyle: UIAlertControllerStyle.Alert)
             let dismissAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Dismiss error message"), style:UIAlertActionStyle.Cancel, handler: { (action) -> Void in
                 alert.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             })
