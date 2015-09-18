@@ -531,11 +531,11 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
         } else {
             let supportText = String(format: "\"%@ Version %@ (%@), %@ (%@), iOS %@ (%@)\"",self.appName!, self.appVersion!, self.appBuild!, device, deviceString!, iOSVersion, lang)
             
-            let alert = UIAlertController(title: NSBundle.mainBundle().localizedStringForKey("Cannot send Email", value: NSLocalizedString("Cannot send Email", comment: "Cannot send Email"), table: "RFAboutView"), message: String(format:NSBundle.mainBundle().localizedStringForKey("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", value: NSLocalizedString("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", comment: "Error message: no email accounts available"), table: "RFAboutView"),self.contactEmail!, supportText, lang), preferredStyle: UIAlertControllerStyle.Alert)
-            let dismissAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Dismiss error message"), style:UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+            let alert = UIAlertController(title: NSBundle.mainBundle().localizedStringForKey("Cannot send Email", value: "Cannot send Email", table: "RFAboutView"), message: String(format:NSBundle.mainBundle().localizedStringForKey("Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", value: "Unfortunately there are no Email accounts available on your device.\n\nFor support questions, please send an Email to %@ and include the following information: %@.\n\nTab the 'Copy info' button to copy this information to your pasteboard. Thank you!", table: "RFAboutView"),self.contactEmail!, supportText, lang), preferredStyle: UIAlertControllerStyle.Alert)
+            let dismissAction = UIAlertAction(title: NSBundle.mainBundle().localizedStringForKey("Dismiss", value: "Dismiss", table: "RFAboutView"), style:UIAlertActionStyle.Cancel, handler: { (action) -> Void in
                 alert.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             })
-            let copyInfoAction = UIAlertAction(title: NSLocalizedString("Copy Info", comment: "Copy diagnostic info to pasteboard"), style:UIAlertActionStyle.Default, handler: { (action) -> Void in
+            let copyInfoAction = UIAlertAction(title: NSBundle.mainBundle().localizedStringForKey("Copy Info", value: "Copy Info", table: "RFAboutView"), style:UIAlertActionStyle.Default, handler: { (action) -> Void in
                 UIPasteboard.generalPasteboard().string = supportText
                 alert.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             })
@@ -550,8 +550,8 @@ public class RFAboutViewController: UIViewController,UITableViewDataSource,UITab
     public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             if result.rawValue == MFMailComposeResultFailed.rawValue {
-                let alert = UIAlertController(title: NSLocalizedString("Message Failed!", comment: "Sending email message failed"), message: NSLocalizedString("Your email has failed to send.", comment: "Sending email message failed body"), preferredStyle: UIAlertControllerStyle.Alert)
-                let dismissAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "Dismiss error message"), style:UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+                let alert = UIAlertController(title: NSBundle.mainBundle().localizedStringForKey("Message Failed!", value: "Message Failed!", table: "RFAboutView"), message: NSBundle.mainBundle().localizedStringForKey("Your email has failed to send.", value: "Your email has failed to send.", table: "RFAboutView"), preferredStyle: UIAlertControllerStyle.Alert)
+                let dismissAction = UIAlertAction(title: NSBundle.mainBundle().localizedStringForKey("Dismiss", value: "Dismiss", table: "RFAboutView"), style:UIAlertActionStyle.Cancel, handler: { (action) -> Void in
                     alert.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 })
                 alert.addAction(dismissAction)
